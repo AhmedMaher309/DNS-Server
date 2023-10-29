@@ -5,7 +5,8 @@
 #include <string.h>
 
 // Function to retrieve the IPv4 address from hostname
-char* getIPAddress(const char* hostname) {
+char* 
+getIPAddress(const char* hostname) {
     struct addrinfo hints, *res;
     char ipstr[INET_ADDRSTRLEN]; // Use INET_ADDRSTRLEN for IPv4
 

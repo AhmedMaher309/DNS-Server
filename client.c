@@ -7,7 +7,8 @@
 #include <unistd.h>
 #define PORT 8080
 
-int main(int argc, char const* argv[])
+int 
+main(int argc, char const* argv[])
 {
 	int status, valread, client_fd;
 	struct sockaddr_in serv_addr;

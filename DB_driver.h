@@ -4,7 +4,8 @@
 #include <string.h>
 #include <unistd.h>
 
-const char* createSQLiteDatabase(const char* dbName) {
+const char* 
+createSQLiteDatabase(const char* dbName) {
     sqlite3* db;
     int rc;
 
@@ -68,7 +69,8 @@ storeNameIPInDatabase(const char* dbName, const char* name, const char* ipAddres
 
 
 // search in the database about an ip address of a specific name and returns it, else return NULL
-char* searchIPByName(const char* dbName, const char* name) {
+char* 
+searchIPByName(const char* dbName, const char* name) {
     sqlite3* db;
     sqlite3_stmt* stmt;
     int rc;
