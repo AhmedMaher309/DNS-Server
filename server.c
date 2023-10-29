@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 #include "DB_driver.h"
-#include "get_ip_address.h"
+#include "ip_from_netdb.h"
 
 #define PORT 8080
 #define BUFFER_SIZE 1024
