@@ -71,6 +71,9 @@ handleClient(int new_socket) {
         ip = "not found";
     }
     printf("ip is sent\n");
+    if(storeNameIPInDatabase(dbName, hostname, ip)){
+        printf("error: entity not stored\n");
+    }
     send(new_socket, ip, strlen(ip), 0);
     close(new_socket);
 }
