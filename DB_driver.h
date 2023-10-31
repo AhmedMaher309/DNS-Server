@@ -105,3 +105,44 @@ searchIPByName(const char* dbName, const char* name) {
     return ipAddress;
 }
 
+
+int insertDataIntoDatabase(const char *dbName, const char *ip, const char *hostname) {
+    sqlite3 *db;
+    char *errMsg = 0;
+    int rc;
+
+    // Open the database
+    rc = sqlite3_open(dbName, &db);
+    if (rc) {
+        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        return rc;
+    }
+
+    // Create the table (if it doesn't exist)
+    char *sql = "CREATE TABLE IF NOT EXISTS hosts (id INTEGER PRIMARY KEY AUTOINCREMENT, ip TEXT, hostname TEXT);";
+    rc = sqlite3_exec(db, sql, 0, 0, &errMsg);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", errMsg);
+        sqlite3_free(errMsg);
+        sqlite3_close(db);
+        return rc;
+    }
+
+    // Insert data into the table
+    char insertSQL[150];
+    sprintf(insertSQL, "INSERT INTO hosts (ip, hostname) VALUES ('%s', '%s');", ip, hostname);
+    rc = sqlite3_exec(db, insertSQL, 0, 0, &errMsg);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", errMsg);
+        sqlite3_free(errMsg);
+        sqlite3_close(db);
+        return rc;
+    }
+
+    // Close the database
+    sqlite3_close(db);
+
+    return SQLITE_OK;
+}
+
+

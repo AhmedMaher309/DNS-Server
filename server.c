@@ -71,7 +71,7 @@ handleClient(int new_socket) {
         ip = "not found";
     }
     printf("ip is sent\n");
-    if(storeNameIPInDatabase(dbName, hostname, ip)){
+    if(insertDataIntoDatabase(dbName, ip, hostname) != SQLITE_OK){
         printf("error: entity not stored\n");
     }
     send(new_socket, ip, strlen(ip), 0);
